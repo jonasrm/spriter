@@ -3,22 +3,24 @@
 
 int debug = 1;
 Modulo braco_dir, braco_esq, corpo, perna_dir, perna_esq, cabeca;
+boolean bloqueado = false;
 
 void setup() {
-  size(400, 600);
+  size(500, 600);
   background(255);
   frameRate(10);
+  smooth();
   //cria elementos básicos
   braco_dir = new Modulo(1, new PVector(15,15), //eixoRotacao
                             new PVector(1,1), //angulos
-                            new PVector(200,60), //posicao
-                            new PVector(30,70) //tamanho
+                            new PVector(250,100), //posicao
+                            new PVector(40,150) //tamanho
                             /*, null*/);
   
   braco_esq = new Modulo(1, new PVector(15,15), //eixoRotacao
                             new PVector(1,1), //angulos
-                            new PVector(100,60), //posicao
-                            new PVector(30,70) //tamanho
+                            new PVector(100,100), //posicao
+                            new PVector(40,150) //tamanho
                             /*, null*/);
   
   corpo = new Modulo(1, new PVector(50,90), //eixoRotacao
@@ -29,14 +31,14 @@ void setup() {
   
   perna_dir = new Modulo(1, new PVector(15,15), //eixoRotacao
                             new PVector(1,1), //angulos
-                            new PVector(200,200), //posicao
-                            new PVector(30,70) //tamanho
+                            new PVector(250,300), //posicao
+                            new PVector(40,150) //tamanho
                             /*, null*/);
   
   perna_esq = new Modulo(1, new PVector(15,15), //eixoRotacao
                             new PVector(1,1), //angulos
-                            new PVector(100,200), //posicao
-                            new PVector(30,70) //tamanho
+                            new PVector(100,300), //posicao
+                            new PVector(40,150) //tamanho
                             /*, null*/);
   
   cabeca = new Modulo(1, new PVector(40,70), //eixoRotacao
@@ -49,6 +51,8 @@ void setup() {
 
 
 void draw() {
+  background(255);
+  update();
   braco_esq.display();
   perna_esq.display();
   corpo.display();
@@ -57,4 +61,20 @@ void draw() {
   cabeca.display();
 }
 
+void update() {
+  braco_esq.over();
+  perna_esq.over();
+  corpo.over();
+  braco_dir.over();
+  perna_dir.over();
+  cabeca.over();
+}
+
+void mousePressed() {
+  bloqueado = true;
+}
+
+void mouseReleased() {
+  bloqueado = false;
+}
 
